@@ -10,12 +10,13 @@ typedef struct Matriz Matriz;
 Matriz* matriz_create(int row, int col);
 void matriz_destroy(Matriz* matriz);
 void matriz_print(Matriz* matriz);
-int matriz_get(Matriz* matriz, int row, int col);
-void matriz_set(Matriz* matriz, int row, int col, int value);
+double matriz_get(Matriz* matriz, int row, int col);
+void matriz_set(Matriz* matriz, int row, int col, double value);
 int matriz_rows(Matriz* matriz);
 int matriz_cols(Matriz* matriz);
 
 // New functions
+bool matriz_equals(Matriz* matriz1, Matriz* matriz2);
 Matriz* matriz_add(Matriz* matriz1, Matriz* matriz2);
 Matriz* matriz_sub(Matriz* matriz1, Matriz* matriz2);
 Matriz* matriz_scalar_mul(Matriz* matriz1, double scalar);
