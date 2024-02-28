@@ -28,6 +28,7 @@ void array_dinamico_destroy(ArrayDinamico* array){
 void array_dinamico_print(ArrayDinamico* array){
     for(int i =0; i <array->size; i++){
         print_element(array->array[i]);
+        printf(" ");
     }
     printf("\n");
 }

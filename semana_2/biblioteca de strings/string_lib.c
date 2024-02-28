@@ -30,9 +30,8 @@ void string_print(String* str) {
 }
 
 String* string_reverse(String* str){
-
-    String* nova = malloc(sizeof(String));
-    nova->data = malloc(str->length * sizeof(char));
+    
+    String* nova = string_create(str->data, str->length);
 
     for(int i = 0; i < str->length; i++){
         nova->data[i] = str->data[str->length - i - 1];
@@ -43,14 +42,12 @@ String* string_reverse(String* str){
     return nova;
 }
 void string_append(String *str1, String* str2){
-    int novo_tamanho = str1->length + str2->length;
-    char* novo_array = realloc(str1->data, (novo_tamanho + 1) * sizeof(char));
-    int j =0;
-    for(int i = 0; i< str2->length; i++){
-        novo_array[str1->length + i] = str2->data[i];
-    }
 
-    novo_array[novo_tamanho] = '\0';
-    str1->data = novo_array;
+    int novo_tamanho = str1->length + str2->length + 1;
+    str1->data = realloc(str1->data, (novo_tamanho) * sizeof(char));
+    for(int i = 0; i< str2->length; i++){
+        str1->data[str1->length + i] = str2->data[i];
+    }
+    str1->data[novo_tamanho] = '\0';
     str1->length = novo_tamanho;
 }
