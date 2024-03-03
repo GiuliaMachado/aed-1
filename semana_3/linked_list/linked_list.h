@@ -14,7 +14,7 @@ void list_insertAfter(LinkedList* list, int pos, Element e);
 //remoção
 bool list_removeFirst(LinkedList* list);
 bool list_removeAt(LinkedList* list, int pos);
-bool list_remove(LinkedList* list, int pos, Element e);
+
 //pegar elementos
 int list_get(LinkedList* list, int pos);
 int list_size(LinkedList* list);

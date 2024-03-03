@@ -2,5 +2,5 @@
 #include <stdio.h>
 
 void element_print(Element e){
-    printf("%d", e);
+    printf("%d ", e);
 }

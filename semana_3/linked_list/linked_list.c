@@ -68,19 +68,52 @@ void list_insertAfter(LinkedList* list, int pos, Element e){
     }
 }
 bool list_removeFirst(LinkedList* list){
-    
+    if(list->head == NULL){
+        return false;
+    }
+
+    Node* trash = list->head;
+    list->head = list->head->next;
+    free(trash);
+    list->size--;
+
+    return true;
 }
 bool list_removeAt(LinkedList* list, int pos){
-    if(pos <0 || pos >= list){
+    // caso 0: posicao invalida
+    if(pos <0 || pos >= list->size){
+        return false;
+    }
+    //caso 1: lista vazia
+    if(list->head == NULL){
+        return false;
+    }
+    //caso 2: remocao no inicio
+    if(pos ==0){
+        list_removeFirst(list);
+    }
+    else{ //caso 3: remocao na cauda
+        Node* prev = list->head;
+        int i = 0;
+        while(i < pos -1){
+            prev = prev->next;
+            i++;
+        }
+
+        Node* trash = prev->next;
+        prev->next = prev->next->next; // ou trash->next;
+        free(trash);
+        list->size--;
         
     }
+    return true;
 }
 
 void list_print(LinkedList* list){
     Node* cur = list->head;
 
     while(cur != NULL){
-        element_print(&cur->element);
+        element_print(cur->element);
         cur = cur->next;
     }
     printf("\n");
