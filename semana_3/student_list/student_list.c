@@ -131,9 +131,7 @@ Student* list_findByRa(StudentList* list, unsigned int ra){
 
 void list_incrementGrades(StudentList* list, float amount){
     Node* cur = list->head;
-    if(list_isEmpty(list)){
-        return 0;
-    }
+    
     while(cur != NULL){
         cur->student->grade = cur->student->grade + amount;
         cur = cur->next;
@@ -143,6 +141,9 @@ void list_incrementGrades(StudentList* list, float amount){
 float list_averageGrade(StudentList* list){
     Node* cur = list->head;
     float media = 0;
+    if(list_isEmpty(list)){
+        return 0;
+    }
     while(cur != NULL){
         media = media + cur->student->grade;
         cur = cur->next;
