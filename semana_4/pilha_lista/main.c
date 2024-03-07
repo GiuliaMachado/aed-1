@@ -11,7 +11,7 @@ int main() {
     stack_push(stack, 4);
     stack_push(stack, 5);
 
-    stack_print(stack);
+    stack_print(stack); 
 
     printf("Popped: ");
     element_print(stack_pop(stack));
