@@ -2,7 +2,7 @@
 #define QUEUE_H
 
 #include <stdbool.h>
-#include "../semana_3/linked_list/element.h"
+#include "../../semana_4/linked_list_2/element.h"
 typedef struct Queue Queue;
 
     Queue* queue_create(int capacity);
