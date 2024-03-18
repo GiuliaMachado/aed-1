@@ -16,8 +16,15 @@ bool list_removeFirst(LinkedList* list);
 bool list_removeAt(LinkedList* list, int pos);
 
 //pegar elementos
-int list_get(LinkedList* list, int pos);
+Element list_get(LinkedList* list, int pos);
 int list_size(LinkedList* list);
 int list_isEmpty(LinkedList* list);
 void list_print(LinkedList* list);
+
+//funcoes novas - estudo p1
+void list_printElements(LinkedList* l1, LinkedList* l2);
+bool list_equals(LinkedList* l1, LinkedList* l2);
+int list_isSorted(LinkedList* l);
+void list_removeDuplicates(LinkedList* l);
+void list_printReverse(LinkedList* l);
 #endif
