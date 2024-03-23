@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "string_buffer.h": "c",
-        "element.h": "c"
+        "element.h": "c",
+        "stdbool.h": "c"
     }
 }
