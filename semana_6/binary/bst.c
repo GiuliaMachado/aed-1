@@ -44,6 +44,68 @@ void bst_destroy(BST* bst){
    bst_destroyNode(bst->root);
    free(bst);
 }
+//Algoritmo de inserção recursiva de nós
+Node* bst_insertRecur(Node* node, Element key){
+    //caso base 1: arvore vazia
+    if(node == NULL){
+        return create_Node(key);
+    }
+    //caso recursivo 1: valor a ser inserido menor
+    if(key < node->key){
+        node->left = bst_insertRecur(node->left, key);
+    }
+    //caso recursivo 2: valor a ser inserido maior
+    else if(key > node->key){
+        node->right = bst_insertRecur(node->right, key);
+    }
+    //caso base 2: valor ja existe na arvore, só retorna o nó
+    return node;
+}
+
+
+//Versão iterativa de Inserção de nós
+void bst_insertIterative(BST* bst, Element key){
+    //caso 1: arvore vazia
+    if(bst->root == NULL){
+        bst->root = create_Node(key);
+        return;
+    }
+    //2 ponteiros para percorrer a arvore
+    Node* parent = NULL;
+    Node* cur = bst->root;
+
+    while(cur != NULL){
+        //caso 1: achou o nó
+        if(cur->key == key){
+            return;
+        }
+        //caso 2: valor a ser inserido menor
+        else if(key < cur->key){
+            parent = cur;
+            cur = cur->left; 
+        }
+        //caso 3: valor maior
+        else{
+            parent = cur;
+            cur = cur->right;
+        }
+    }
+
+    //insercao a partir do nó parent
+    //caso 1: o valor é menor que o valor de parent
+    if(key < parent->key){
+        parent->left = create_Node(key);
+    }
+    //caso 2: o valor é maior do que o valor de parent
+    else{
+        parent->right = create_Node(key);
+    }
+}
+
+void bst_insert(BST* bst, Element key){
+    bst->root = bst_insertRecur(bst->root, key);
+    //bst_insertIterative(bst, key);
+}
 
 //versão iterativa
 bool bst_searchIter(BST* bst, Element key){
@@ -63,22 +125,21 @@ bool bst_searchIter(BST* bst, Element key){
 }
 
 //versao recursiva
-bool bst_searchRecur(BST* bst, Element key){
-    Node* cur = bst->root;
+bool bst_searchRecur(Node* node, Element key){
     //caso base 1: arvore vazia
-    if(bst->root == NULL){
+    if(node == NULL){
         return false;
     }
     //caso base 2: achou o valor
-    if(key == cur->key){
+    if(key == node->key){
         return true;
     }
     //caso recursivo 1: valor menor
-    if(key < cur->key){
-        return bst_searchRecur(cur->left, key);
+    if(key < node->key){
+        return bst_searchRecur(node->left, key);
     }
     //caso recursivo 2: valor maior
-    return bst_searchRecur(cur->right, key);
+    return bst_searchRecur(node->right, key);
 }
 bool bst_search(BST* bst, Element key){
     //escolho se quero versao iterativa ou recursiva
@@ -107,7 +168,7 @@ void bst_printNodePreOrder(Node* node){
     }
     element_print(node->key);
     printf(" ");
-    bst_printPreOrder(node->left);
+    bst_printNodePreOrder(node->left);
     bst_printNodePreOrder(node->right);
 }
 void bst_printPreOrder(BST* bst){
@@ -122,5 +183,10 @@ void bst_printNodePosOrder(Node* node){
     bst_printNodePosOrder(node->left);
     bst_printNodePosOrder(node->right);
     element_print(node->key);
+    printf(" ");
+}
+
+void bst_printPostOrder(BST* bst){
+    bst_printNodePosOrder(bst->root);
     printf(" ");
 }
