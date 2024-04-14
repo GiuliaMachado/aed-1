@@ -85,18 +85,18 @@ Node* rotateLeft(Node* node){
 */
 Node* rebalance(Node* node){
     updateHeight(node);
-    //no critico
+    //no critico Right
     if(balanceFactor(node) < -1){
         if(balanceFactor(node->right)> 0){
             node->right = rotateRight(node->left);
         }
         return rotateLeft(node);
     }
-    //nó critico
+    //nó critico Left
     else if(balanceFactor(node) > 1){
         if(balanceFactor(node->left) < 0){
             node->left = rotateLeft(node->right);
         }
         return rotateRight(node);
     }
-}
+} 
