@@ -91,10 +91,44 @@ void bheap_insert(BinaryHeap *heap, Element element){
     }
     heap->data[heap->size] = element;
     heap->size++;
+
+    siftUp(heap);
 }
 
-Element bheap_extract(BinaryHeap *heap);
-Element bheap_peek(BinaryHeap *heap);
+//funcoes auxiliares da remocao
+int maximumAt(BinaryHeap* bheap, int pos1, int pos2){
+    return get(bheap, pos1) > get(bheap, pos2) ? pos1 : pos2;
+}
+void siftDown(BinaryHeap* heap){
+    int cur =0;
+    while(hasLeft(heap, cur)){
+        int max = maximumAt(heap, left(cur), right(cur));
+
+        if(get(heap, cur) > get(heap, max)){
+            break;
+        }
+        swapAt(heap, cur, max);
+        cur = max;
+    }
+}
+Element bheap_extract(BinaryHeap *heap){
+    if(heap->size == 0){
+        return ELEMENT_NULL;
+    }
+    Element result = heap->data[0];
+    heap->data[0] = heap->data[heap->size-1];
+    heap->size--;
+
+    siftDown(heap);
+    return result;
+}
+Element bheap_peek(BinaryHeap *heap){
+    if(heap->size == 0){
+        return ELEMENT_NULL;
+    }
+
+    return heap->data[0];
+}
 int bheap_size(BinaryHeap* heap){
     return heap->size;
 }
